@@ -46,3 +46,9 @@ user@linuxbox:/path/to/workspace$ du -hs MyFirstApp*
 912K    MyFirstAppEclipse
 132K    MyFirstAppSdk
 ```
+
+### Version control for Android Apps using Git
+
+```
+user@linuxbox:/path/to/workspace$ wget -O - http://www.gitignore.io/api/android > .gitignore
+```
