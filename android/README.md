@@ -71,7 +71,14 @@ Tentatives for Trouble #1:
 - `adb kill-server && adb start-server` on the Linux box;
 - turn *Developer options -> USB debugging* off/on on the device;
 
+Solution for Trouble #1: new rule for udev (needed by some devices, maybe by HTC's and not by Samsung's)
+
+- get the vendor code using `lsusb` (for my smartphone was `0bb4`),
+- `root@linuxbox:~# echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", MODE="0666", GROUP="plugdev"' > /etc/udev/rules.d/99-adb.rules && service udev restart`
+
 Solution for Trouble #2: installed the latest ADT Bundle;
 
 - no need to download again the packages from Android SDK Manager: copying them by hand, it works (`adt-bundle/sdk/system-images` and `adt-bundle/sdk/build-tools`);
 - new version uses [Support Library Setup](<https://developer.android.com/tools/support-library/setup.html#using-apis>): what about `.gitignore`?
+
+Now I can debug using Eclipse or Ant; Ant can only deploy a debug APK or a signed release APK (not an unsigned release: `INSTALL_PARSE_FAILED_NO_CERTIFICATES`).
