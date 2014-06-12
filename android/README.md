@@ -12,7 +12,7 @@ Which environment? Three possibilities:
 2. Android Studio (IntelliJ IDEA + plugin - early access preview at June 2014),
 3. other IDEs + Android SDK (e.g. Netbeans + NBAndroid).
 
-Was chosen the first: *ADT bundle*.
+Was chosen the first: *ADT bundle*, on a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
 
 ### Which Target
 
@@ -52,3 +52,26 @@ user@linuxbox:/path/to/workspace$ du -hs MyFirstApp*
 ```
 user@linuxbox:/path/to/workspace$ wget -O - http://www.gitignore.io/api/android > .gitignore
 ```
+
+### Deploying the app
+
+Some troubles here. In a nutshell, we need to:
+
+1. Set the device in *development mode* and connect it to the Linux box via USB (handshake).
+2. Compile via shell using `ant` (or *run* in Eclipse with ADT).
+3. Deploy via shell using `adb` (or *run* in Eclipse with ADT).
+
+After setting the *development mode*, the *Developer options -> USB debugging* and *Security -> Unknown sources* where also set.
+
+1. Trouble #1: the smartphone remains unknown to the Linux box (the tablet, intead, asked me a confirmation and the association was done).
+2. Trouble #2: the deploy worked from the shell, but not fro Eclipse.
+
+Tentatives for Trouble #1:
+
+- `adb kill-server && adb start-server` on the Linux box;
+- turn *Developer options -> USB debugging* off/on on the device;
+
+Solution for Trouble #2: installed the latest ADT Bundle;
+
+- no need to download again the packages from Android SDK Manager: copying them by hand, it works (`adt-bundle/sdk/system-images` and `adt-bundle/sdk/build-tools`);
+- new version uses [Support Library Setup](<https://developer.android.com/tools/support-library/setup.html#using-apis>): what about `.gitignore`?
