@@ -64,7 +64,8 @@ Some troubles here. In a nutshell, we need to:
 After setting the *development mode*, the *Developer options -> USB debugging* and *Security -> Unknown sources* where also set.
 
 1. Trouble #1: the smartphone remains unknown to the Linux box (the tablet, intead, asked me a confirmation and the association was done).
-2. Trouble #2: the deploy worked from the shell, but not fro Eclipse.
+2. Trouble #2: the deploy worked from the shell, but not from Eclipse.
+3. Trouble #3: Eclipse gives me  the `Path for project must have only one segment` error.
 
 Tentatives for Trouble #1:
 
@@ -81,4 +82,8 @@ Solution for Trouble #2: installed the latest ADT Bundle;
 - no need to download again the packages from Android SDK Manager: copying them by hand, it works (`adt-bundle/sdk/system-images` and `adt-bundle/sdk/build-tools`);
 - new version uses [Support Library Setup](<https://developer.android.com/tools/support-library/setup.html#using-apis>): what about `.gitignore`?
 
+Solution for Trouble #3: go to `Project -> Properties -> Run/Debug Settings:` and delete `Launching New_configuration`.
+
 Now I can debug using Eclipse or Ant; Ant can only deploy a debug APK or a signed release APK (not an unsigned release: `INSTALL_PARSE_FAILED_NO_CERTIFICATES`).
+
+Good news: can do USB deployment while keeping USB tethering active from the same device.
