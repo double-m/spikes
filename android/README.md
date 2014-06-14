@@ -146,7 +146,7 @@ References:
 
 - [books.sonatype.com](<http://books.sonatype.com/mvnref-book/reference/android-dev.html>)
 
-For an opensource project, the artifact available in Maven Central would suffice; let's see how to prepare an environment to be able to use "newer versions of the platform as well as the compatibility package and proprietary extensions like the Google Maps support", that must be installed in another Maven repo (e.g. the local repo). 
+For an opensource project, the artifact available in Maven Central would suffice; let's see how to prepare an environment to be able to use "newer versions of the platform as well as the compatibility package and proprietary extensions like the Google Maps support": this must be downloaded and installed in another Maven repo (e.g. the local repo). 
 
 Prerequisites:
 
@@ -165,7 +165,7 @@ mvn clean install -P 4.4
 
 Check:
 
-Downloaded [samples](<https://github.com/jayway/maven-android-plugin-samples>), unarchived and changed to `helloflashlight` project; set version 19 in `pom.xml`, at `plugins.plugin.configuration.sdk.platform` and:
+Downloaded [samples](<https://github.com/jayway/maven-android-plugin-samples>), unarchived and changed to `helloflashlight` project; set version 19 in `pom.xml`, at `plugins.plugin.configuration.sdk.platform` then:
 
 ```
 mvn clean install android:deploy android:run
@@ -189,7 +189,7 @@ mvn archetype:generate \
 sed -i 's/<platform.version>/<platform.version>4.1.1.4/' my-android-application/pom.xml
 cd my-android-application
 mvn clean install android:deploy android:run
-# enjoy it on the device:)
+# enjoy it on the device :)
 mvn android:undeploy
 ```
 
