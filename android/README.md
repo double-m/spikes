@@ -104,11 +104,21 @@ Good news: can do USB deployment while keeping USB tethering active from the sam
 
 [Building a Simple User Interface](<http://developer.android.com/training/basics/firstapp/building-ui.html>)
 
+### SDK generated project on Eclipse
+
+- Can do debug.
+- Can follow easily the tutorial about resources.
+- Deploy a lighter version of the app (50KB instead of 2MB).
+- When Eclipse imports the existing code, adds three hidden directories.
+- At compile time, Eclipse gives a warning: the manifest lacks of `<uses-sdk />` and `<application android:allowBackup="true" ... />` (added by hand).
+
+Also: project succesfully refactored and run with different API specification.
+
+Conclusion: except for the adjustments by hand, the SDK creation script seems a good starting point.
+
 ### TODO
 
-Find a clean way to generate a new project:
+Find a cleaner way to generate a new project:
 
-- SDK, then import in Eclipse?
 - Maven, then import in Eclipse?
 
-Not just Eclipse, for sure, 'cause I like typing (not mouse clicks) and the resulting structure seems too complex (expecially from the SVC point of view).
