@@ -12,7 +12,7 @@ Which environment? Three possibilities:
 2. Android Studio (IntelliJ IDEA + plugin - early access preview at June 2014),
 3. other IDEs + Android SDK (e.g. Netbeans + NBAndroid).
 
-Was chosen the first: *ADT bundle*, on a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
+Let's choose the first (for now): *ADT bundle*; I'm using a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
 
 ### Which Target
 
@@ -21,13 +21,37 @@ I have:
 - Samsung Galaxy Tab2 7.0, o.s. Android 4.2.2,
 - Wiko Izzy, o.s. Android 4.2.2
 
-so I installed the SDK platform and build target for *Android 4.2.2  (rev. 17)* (selecting *Window -> Android SDK Manager* in Eclipse with ADT or typing `/opt/adt-bundle/sdk/tools/android sdk` in the system shell). See it in the shell:
+so I installed the SDK platform and build target for *Android 4.2.2 (rev. 17)* (selecting *Window -> Android SDK Manager* in Eclipse with ADT or typing `/opt/adt-bundle/sdk/tools/android sdk` in the system shell). See it in the shell:
 
 ```
 /opt/adt-bundle/sdk/tools/android list targets
 ```
 
 The [SDK manager guide](<http://developer.android.com/tools/help/sdk-manager.html>) recommends to install the latest and the first (at the moment, the latest is 4.4.2 (rev. 19); as the first, it indicates 2.2). Question: what about in beetween targets? Let's see later.
+
+### ENV and PATH
+
+```
+user@linuxbox:~$ cat .profile
+[...] 
+export ANDROID_HOME=/opt/adt-bundle/sdk
+
+ADT_TOOLS="$ANDROID_HOME/tools"
+[ -d "${ADT_TOOLS}" ] && PATH="$PATH:$ADT_TOOLS"
+
+ADT_PLATFORM_TOOLS="$ANDROID_HOME/platform-tools"
+[ -d "${ADT_PLATFORM_TOOLS}" ] && PATH="$PATH:$ADT_PLATFORM_TOOLS"
+[...] 
+```
+
+Now, the commands seen in the previous section become accessible without path:
+
+```
+user@linuxbox:~$ android sdk
+user@linuxbox:~$ android list targets
+```
+
+and the exported directory is necessary for other services (e.g. Maven).
 
 ### Creating the App
 
@@ -116,9 +140,61 @@ Also: project succesfully refactored and run with different API specification.
 
 Conclusion: except for the adjustments by hand, the SDK creation script seems a good starting point.
 
+### Maven generated project
+
+References:
+
+- [books.sonatype.com](<http://books.sonatype.com/mvnref-book/reference/android-dev.html>)
+
+For an opensource project, the artifact available in Maven Central would suffice; let's see how to prepare an environment to be able to use "newer versions of the platform as well as the compatibility package and proprietary extensions like the Google Maps support", that must be installed in another Maven repo (e.g. the local repo). 
+
+Prerequisites:
+
+- Maven 3.1.1+
+- exported Android SDK directory (see above)
+- Google APIs and GDK add-ons for Android 4.4.2 (API 19), downloded using the Android SDK Manager
+
+Preparation of the local Maven repository:
+
+```
+wget https://github.com/mosabua/maven-android-sdk-deployer/archive/master.zip
+unzip master.zip
+cd maven-android-sdk-deployer-master
+mvn clean install -P 4.4
+```
+
+Check:
+
+Downloaded [samples](<https://github.com/jayway/maven-android-plugin-samples>), unarchived and changed to `helloflashlight` project; set version 19 in `pom.xml`, at `plugins.plugin.configuration.sdk.platform` and:
+
+```
+mvn clean install android:deploy android:run
+```
+
+Usage:
+
+```
+mvn archetype:generate \
+ -DarchetypeArtifactId=android-quickstart \
+ -DarchetypeGroupId=de.akquinet.android.archetypes \
+ -DarchetypeVersion=1.0.11 \
+ -DarchetypeRepository=~/.m2/repository
+ -DgroupId=com.marcellomessori \
+ -DartifactId=my-android-application \
+ -Dplatform=19 \
+ -Dandroid-plugin-version=3.8.2 \
+ -Dversion=1.0 \
+ -DinteractiveMode=false
+# the following editing is not needed for platform<=16
+sed -i 's/<platform.version>/<platform.version>4.1.1.4/' my-android-application/pom.xml
+cd my-android-application
+mvn clean install android:deploy android:run
+# enjoy it on the device:)
+mvn android:undeploy
+```
+
+See [stand.spree.de](<http://stand.spree.de/wiki_details_maven_archetypes>) for other archetypes.
+
 ### TODO
 
-Find a cleaner way to generate a new project:
-
-- Maven, then import in Eclipse?
-
+- how the Maven generated project behave in Eclipse and in Netbeans?
