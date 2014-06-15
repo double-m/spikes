@@ -12,7 +12,9 @@ Which environment? Three possibilities:
 2. Android Studio (IntelliJ IDEA + plugin - early access preview at June 2014),
 3. other IDEs + Android SDK (e.g. Netbeans + NBAndroid).
 
-Let's choose the first (for now): *ADT bundle*; I'm using a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
+Let's choose the first (for now): *ADT bundle*, then we'll make some tests.
+
+I'm using a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
 
 ### Which Target
 
@@ -119,11 +121,6 @@ Now I can debug using Eclipse or Ant; Ant can only deploy a debug APK or a signe
 
 Good news: can do USB deployment while keeping USB tethering active from the same device.
 
-### Alternative IDEs
-
-- Netbeans with NBandroid plugin: not tested for now; the core plugin is free, while the extras (useful?) cost 15 EUR
-- Netbeans with CodenameOne plugin: one plugin to generate native code for Android, IOS, etc., free for the first 100 builds (not my need); generation's been done server side after registration.
-
 ### Following the tutorial
 
 [Building a Simple User Interface](<http://developer.android.com/training/basics/firstapp/building-ui.html>)
@@ -178,7 +175,7 @@ mvn archetype:generate \
  -DarchetypeArtifactId=android-quickstart \
  -DarchetypeGroupId=de.akquinet.android.archetypes \
  -DarchetypeVersion=1.0.11 \
- -DarchetypeRepository=~/.m2/repository
+ -DarchetypeRepository=~/.m2/repository \
  -DgroupId=com.marcellomessori \
  -DartifactId=my-android-application \
  -Dplatform=19 \
@@ -195,6 +192,20 @@ mvn android:undeploy
 
 See [stand.spree.de](<http://stand.spree.de/wiki_details_maven_archetypes>) for other archetypes.
 
-### TODO
+### Maven generated project in Netbeans
 
-- how the Maven generated project behave in Eclipse and in Netbeans?
+Let's open the newly created project in Netbeans 8.0:
+
+- since Maven is fully supported, Netbeans can open the project without any furter editing (we just need to execute `mvn install`, or the IDE will complain about the lack or the `R` class);
+- despite the installed *NBandroid* plugin, the Maven project is not recognized as an Android project, so
+    - the *Projects* window is useless (it can't show the `res` folder, then *Files* should be used instead) and,
+    - in order to deploy, a custom goal must be defined;
+- the graphical layout editor is not available; what's worst, the layout preview neither: they need the *NBandroid extra* plugin (for a fee of 15 EUR).
+
+Just to mention, unrelated to Maven, there's CodenameOne plugin for Netbeans: one plugin to generate native code for Android, IOS, etc., free for the first 100 builds; generation's been done server side after registration.
+
+Awright, Netbeans, you lose. You know, I love ya the way I love my kitchen, but an oven is not the best tool to iron a pair of trousers: this time I'm dating Eclipse.
+
+### Maven generated project in Eclipse
+
+- how the Maven generated project behave in Eclipse?
