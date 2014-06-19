@@ -216,4 +216,3 @@ Now generate a project as above, enter `my-android-application` and try `mvn ecl
 - *Import... -> Maven -> Existing Maven Projecta* (cannot recognize Android nature of the project)
 
 No easy way. Now let's try [this](<http://www.karlmonaghan.com/2013/03/28/eclipse-adt-maven-m2e-android-connector-setup/>)
-
