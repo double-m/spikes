@@ -8,11 +8,11 @@ Reference:
 
 Which environment? Three possibilities:
 
-1. ADT bundle (Eclipse + ADT plugin),
+1. ADT Bundle (Eclipse + ADT plugin),
 2. Android Studio (IntelliJ IDEA + plugin - early access preview at June 2014),
 3. other IDEs + Android SDK (e.g. Netbeans + NBAndroid).
 
-Let's choose the first (for now): *ADT bundle*, then we'll make some tests.
+Let's choose the first (for now): *ADT Bundle*, then we'll make some tests.
 
 I'm using a laptop with a Debian GNU/Linux as o.s. (here simply called *Linux box* ).
 
@@ -147,7 +147,7 @@ For an opensource project, the artifact available in Maven Central would suffice
 
 Prerequisites:
 
-- Maven 3.1.1+
+- Maven 3.1.1+ (see [here](<http://www.karlmonaghan.com/2013/03/28/eclipse-adt-maven-m2e-android-connector-setup>))
 - exported Android SDK directory (see above)
 - Google APIs and GDK add-ons for Android 4.4.2 (API 19), downloded using the Android SDK Manager
 
@@ -204,8 +204,16 @@ Let's open the newly created project in Netbeans 8.0:
 
 Just to mention, unrelated to Maven, there's CodenameOne plugin for Netbeans: one plugin to generate native code for Android, IOS, etc., free for the first 100 builds; generation's been done server side after registration.
 
-Awright, Netbeans, you lose. You know, I love ya the way I love my kitchen, but an oven is not the best tool to iron a pair of trousers: this time I'm dating Eclipse.
+Awright, Netbeans, you lose. Let's try with Eclipse.
 
 ### Maven generated project in Eclipse
 
-- how the Maven generated project behave in Eclipse?
+Let's try installing the M2E plugin: in ADT Bundle, *Help -> Install New Software... -> Work with:* `http://download.eclipse.org/technology/m2e/releases`
+
+Now generate a project as above, enter `my-android-application` and try `mvn eclipse:eclipse`. Because of differences in generated paths, ADT Bundle fails in:
+
+- *Import... -> Android -> Existing Android Code into Workspace* (cannot nest `src/main` in `src`)
+- *Import... -> Maven -> Existing Maven Projecta* (cannot recognize Android nature of the project)
+
+No easy way. Now let's try [this](<http://www.karlmonaghan.com/2013/03/28/eclipse-adt-maven-m2e-android-connector-setup/>)
+
