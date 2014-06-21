@@ -208,11 +208,11 @@ Awright, Netbeans, you lose. Let's try with Eclipse.
 
 ### Maven generated project in Eclipse
 
-Let's try installing the M2E plugin: in ADT Bundle, *Help -> Install New Software... -> Work with:* `http://download.eclipse.org/technology/m2e/releases`
+Let's install the *M2E* plugin and the *Android M2E* integration plugin. We don't need the MarketPlace Client for Eclise: in ADT Bundle, just *Help -> Install New Software... -> Work with:* `http://download.eclipse.org/technology/m2e/releases` and select:
 
-Now generate a project as above, enter `my-android-application` and try `mvn eclipse:eclipse`. Because of differences in generated paths, ADT Bundle fails in:
+- m2e - Maven integration for Eclipse,
+- Android integration for Maven Eclipse.
 
-- *Import... -> Android -> Existing Android Code into Workspace* (cannot nest `src/main` in `src`)
-- *Import... -> Maven -> Existing Maven Projecta* (cannot recognize Android nature of the project)
+We don't need any `mvn eclipse:eclipse`: just generate a project as above and import it in ADT Bunble (the `.project` will be created correctly).
 
-No easy way. Now let's try [this](<http://www.karlmonaghan.com/2013/03/28/eclipse-adt-maven-m2e-android-connector-setup/>)
+At the moment, the ADT Bundle is not able to build, but I use it as an editor; for all the building stuff, I use `mvn` from the console.
