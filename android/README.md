@@ -62,7 +62,7 @@ Created *MyFirstAppEclipse* using Eclipse menu.
 Created *MyFirstAppSdk* using the shell:
 
 ```
-/opt/adt-bundle/sdk/tools/android create project --target android-17 --name MyFirstAppSdk --path /path/to/workspace/MyFirstAppSdk --activity MainActivity --package com.marcellomessori.myfirstappsdk
+/opt/adt-bundle/sdk/tools/android create project --target android-19 --name MyFirstAppSdk --path /path/to/workspace/MyFirstAppSdk --activity MainActivity --package com.marcellomessori.myfirstappsdk
 ```
 
 The second is lighter:
@@ -86,12 +86,12 @@ This is true for the SDK generated project, not for ADT Bundle's generated proje
 Some troubles here. In a nutshell, we need to:
 
 1. Set the device in *development mode* and connect it to the Linux box via USB (handshake).
-2. Compile via shell using `ant` (or *run* in Eclipse with ADT).
-3. Deploy via shell using `adb` (or *run* in Eclipse with ADT).
+2. Compile via shell using `ant debug install` (or *run* in Eclipse with ADT).
+3. Deploy via shell using `adb debug install` (or *run* in Eclipse with ADT).
 
 After setting the *development mode*, the *Developer options -> USB debugging* and *Security -> Unknown sources* where also set.
 
-1. Trouble #1: the smartphone remains unknown to the Linux box (the tablet, intead, asked me a confirmation and the association was done).
+1. Trouble #1: the smartphone remains unknown to the Linux box (the tablet, instead, asked me a confirmation and the association was done).
 2. Trouble #2: the deploy worked from the shell, but not from Eclipse.
 3. Trouble #3: Eclipse gives me the `Path for project must have only one segment` error.
 4. Trouble #4: Eclipse gives me a NullPointerException after creating a new project.
@@ -104,7 +104,8 @@ Tentatives for Trouble #1:
 Solution for Trouble #1: new rule for udev (needed by some devices, maybe by HTC's and not by Samsung's)
 
 - get the vendor code using `lsusb` (for my smartphone was `0bb4`),
-- `root@linuxbox:~# echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", MODE="0666", GROUP="plugdev"' > /etc/udev/rules.d/99-adb.rules && service udev restart`
+- `root@linuxbox:~# echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", MODE="0666", GROUP="plugdev"' > /etc/udev/rules.d/99-adb.rules && /etc/init.d/udev restart`,
+- disconnect and reconnect device (unplugging the USB).
 
 Solution for Trouble #2: installed the latest ADT Bundle;
 
@@ -121,11 +122,11 @@ Now I can debug using Eclipse or Ant; Ant can only deploy a debug APK or a signe
 
 Good news: can do USB deployment while keeping USB tethering active from the same device.
 
-### Following the tutorial
+### Followed the tutorial
 
 [Building a Simple User Interface](<http://developer.android.com/training/basics/firstapp/building-ui.html>)
 
-### SDK generated project on Eclipse
+### Ant based SDK generated project on ADT Bundle (Eclipse)
 
 - Can do debug.
 - Can follow easily the tutorial about resources.
@@ -172,16 +173,16 @@ Usage:
 
 ```
 mvn archetype:generate \
- -DarchetypeArtifactId=android-quickstart \
- -DarchetypeGroupId=de.akquinet.android.archetypes \
- -DarchetypeVersion=1.0.11 \
- -DarchetypeRepository=~/.m2/repository \
- -DgroupId=com.marcellomessori \
- -DartifactId=my-android-application \
- -Dplatform=19 \
- -Dandroid-plugin-version=3.8.2 \
- -Dversion=1.0 \
- -DinteractiveMode=false
+-DarchetypeArtifactId=android-quickstart \
+-DarchetypeGroupId=de.akquinet.android.archetypes \
+-DarchetypeVersion=1.0.11 \
+-DarchetypeRepository=~/.m2/repository \
+-DgroupId=com.marcellomessori \
+-DartifactId=my-android-application \
+-Dplatform=19 \
+-Dandroid-plugin-version=3.8.2 \
+-Dversion=1.0 \
+-DinteractiveMode=false
 # the following editing is not needed for platform<=16
 sed -i 's/<platform.version>/<platform.version>4.1.1.4/' my-android-application/pom.xml
 cd my-android-application
@@ -198,8 +199,8 @@ Let's open the newly created project in Netbeans 8.0:
 
 - since Maven is fully supported, Netbeans can open the project without any furter editing (we just need to execute `mvn install`, or the IDE will complain about the lack or the `R` class);
 - despite the installed *NBandroid* plugin, the Maven project is not recognized as an Android project, so
-    - the *Projects* window is useless (it can't show the `res` folder, then *Files* should be used instead) and,
-    - in order to deploy, a custom goal must be defined;
+  - the *Projects* window is useless (it can't show the `res` folder, then *Files* should be used instead) and,
+  - in order to deploy, a custom goal must be defined;
 - the graphical layout editor is not available; what's worst, the layout preview neither: they need the *NBandroid extra* plugin (for a fee of 15 EUR).
 
 Just to mention, unrelated to Maven, there's CodenameOne plugin for Netbeans: one plugin to generate native code for Android, IOS, etc., free for the first 100 builds; generation's been done server side after registration.
@@ -211,8 +212,16 @@ Awright, Netbeans, you lose. Let's try with Eclipse.
 Let's install the *M2E* plugin and the *Android M2E* integration plugin. We don't need the MarketPlace Client for Eclise: in ADT Bundle, just *Help -> Install New Software... -> Work with:* `http://download.eclipse.org/technology/m2e/releases` and select:
 
 - m2e - Maven integration for Eclipse,
-- Android integration for Maven Eclipse.
+
+then let's do the same with `http://rgladwell.github.com/m2e-android/updates/` and select
+
+- Android for Maven Eclipse.
 
 We don't need any `mvn eclipse:eclipse`: just generate a project as above and import it in ADT Bunble (the `.project` will be created correctly).
 
 At the moment, the ADT Bundle is not able to build, but I use it as an editor; for all the building stuff, I use `mvn` from the console.
+
+### TODO: follow the tutorial
+
+[Starting Another Activity](<http://developer.android.com/training/basics/firstapp/starting-activity.html>)
+
