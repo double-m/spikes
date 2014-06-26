@@ -11,13 +11,29 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
-        <activity android:name=".HelloAndroidActivity" >
+        android:label="@string/app_name" >
+        <activity android:name="com.marcellomessori.HelloAndroidActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.marcellomessori.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message"
+            android:parentActivityName="com.marcellomessori.HelloAndroidActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marcellomessori.HelloAndroidActivity" />
+        </activity>
+        <activity
+            android:name="com.marcellomessori.DisplayMessageActivity1"
+            android:label="@string/title_activity_display_message_activity1"
+            android:parentActivityName="com.marcellomessori.HelloAndroidActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marcellomessori.HelloAndroidActivity" />
         </activity>
     </application>
 

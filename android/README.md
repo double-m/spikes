@@ -217,7 +217,7 @@ then let's do the same with `http://rgladwell.github.com/m2e-android/updates/` a
 
 - Android for Maven Eclipse.
 
-We don't need any `mvn eclipse:eclipse`: just generate a project as above and import it in ADT Bunble (the `.project` will be created correctly).
+We don't need any `mvn eclipse:eclipse`: just generate a project as above and import it in ADT Bunble (the `.project` will be created correctly). An error will be given in about the `pom.xml` for [these](<http://stackoverflow.com/questions/21016211/error-in-maven-pom-xml-file>) reasons: let's just ignore it.
 
 At the moment, the ADT Bundle is not able to build, but I use it as an editor; for all the building stuff, I use `mvn` from the console.
 
@@ -225,3 +225,24 @@ At the moment, the ADT Bundle is not able to build, but I use it as an editor; f
 
 [Starting Another Activity](<http://developer.android.com/training/basics/firstapp/starting-activity.html>)
 
+*ActionBarActivity* is a class contained in the library *appcompat-v7* (not in *appcompat-v4*). Since this library is not available in the Maven Central Repository, we need to install it in the local repository, by following these steps:
+
+- in *Android SDK Manager*, select and install *Android Support Repository*: note that the new directory `$ANDROID_HOME/extras/android/m2repository` has been created;
+- execute in the shell:
+
+```
+cd $ANDROID_HOME/extras/android/m2repository
+unzip com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.aar classes.jar
+mvn install:install-file -Dfile="./com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar" -DpomFile="./com/android/support/support-v4/19.1.0/support-v4-19.1.0.pom" -Dpackaging="jar"
+mv classes.jar com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.jar
+mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.jar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="jar"
+mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.aar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="apklib"
+```
+
+- add these two libraries to the `pom.xml` with `<scope>provided</scope>`
+- use `import android.support.v7.app.*;` in the code (ADT Bundle doesn't suggest it due to partial Maven support).
+
+Trubleshooting:
+
+- `res/menu/display_message.xml:6: error: No resource identifier found for attribute 'showAsAction'` -> add `import android.support.v7.appcompat.*;` (TODO)
+- when pressing the button, the application crashes (TODO)
