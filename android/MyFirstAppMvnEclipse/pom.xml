@@ -26,15 +26,7 @@
       <groupId>com.android.support</groupId>
       <artifactId>appcompat-v7</artifactId>
       <version>${android.support.compatibility.version}</version>
-      <type>apklib</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.android.support</groupId>
-      <artifactId>appcompat-v7</artifactId>
-      <version>${android.support.compatibility.version}</version>
       <type>jar</type>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -47,6 +39,12 @@
           <artifactId>android-maven-plugin</artifactId>
           <version>${android.plugin.version}</version>
           <extensions>true</extensions>
+          <configuration>
+            <run>
+              <debug>true</debug>
+            </run>
+            <!--<undeployBeforeDeploy>true</undeployBeforeDeploy>-->
+          </configuration>
         </plugin>
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
         <plugin>

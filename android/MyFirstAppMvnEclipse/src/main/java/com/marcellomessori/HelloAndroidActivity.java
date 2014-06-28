@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class HelloAndroidActivity extends Activity {
 	
-	public final static String EXTRA_MESSAGE = "com.marcellomessori.myfirstappmvneclipse.MESSAGE";
+	public final static String EXTRA_MESSAGE = "com.marcellomessori.MESSAGE";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
