@@ -41,7 +41,7 @@
           <extensions>true</extensions>
           <configuration>
             <run>
-              <debug>true</debug>
+              <debug>false</debug>
             </run>
             <!--<undeployBeforeDeploy>true</undeployBeforeDeploy>-->
           </configuration>

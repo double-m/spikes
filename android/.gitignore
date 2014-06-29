@@ -1,5 +1,7 @@
 # Added by double-m
 
+.metadata/
+
 */.classpath
 */.project
 */.settings/

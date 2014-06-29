@@ -13,7 +13,7 @@ public class HelloAndroidActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_android_hello);
 	}
 
 	/** Called when the user clicks the Send button */

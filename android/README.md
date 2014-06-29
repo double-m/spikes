@@ -255,4 +255,4 @@ mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appco
 
 Trubleshooting:
 
-- the application crashes on `super.onCreate` in `DisplayMessageActivity` class: debugging time.
+- the application crashes on `super.onCreate` in `DisplayMessageActivity` class: debugging time. Works if `DisplayMessageActivity` is `android.app.Activity`, not if an `android.support.v7.app.ActionBarActivity`, or if in an ADT Bundle's project: probably the `appcompat-v7` library gets lost in the Maven deploy process. TODO: investigate).

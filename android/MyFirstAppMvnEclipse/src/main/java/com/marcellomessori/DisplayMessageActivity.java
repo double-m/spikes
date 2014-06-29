@@ -2,18 +2,15 @@ package com.marcellomessori;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.app.Activity;
 import android.widget.TextView;
 
-public class DisplayMessageActivity extends ActionBarActivity {
+public class DisplayMessageActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("DisplayMessageActivity", "before onCreate");
-		super.onCreate(savedInstanceState);
-		Log.v("DisplayMessageActivity", "you don't see me - it brakes here");
-		
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+
 	    // Get the message from the intent
 	    Intent intent = getIntent();
 	    String message = intent.getStringExtra(HelloAndroidActivity.EXTRA_MESSAGE);
