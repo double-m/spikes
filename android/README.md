@@ -219,40 +219,44 @@ then let's do the same with `http://rgladwell.github.com/m2e-android/updates/` a
 
 We don't need any `mvn eclipse:eclipse`: just generate a project as above and import it in ADT Bunble (the `.project` will be created correctly). An error will be given in about the `pom.xml` for [these](<http://stackoverflow.com/questions/21016211/error-in-maven-pom-xml-file>) reasons: let's just ignore it.
 
-At the moment, the ADT Bundle is not able to build, but I use it as an editor; for all the building stuff, I use `mvn` from the console.
+In case of editing of the `pom.xml` file outside Eclipse:
 
-It is possible to debug the application from ADT Bundle: if `<debug>true</debug>` is present in the `pom.xml`, just open ADT Bundle in debug mode and run the application using `mvn ... android:run`.
+- `F5` over the project tree updates the properties and so the Maven libraries;
+- *Project* -> *Clean...* updates the code completion and suggestions.
 
-### TODO: following the tutorial
+If we want to build the app from in the ADT Bundle, a *Run configuration* can be configured using the same goals we'd specify to the shell command `mvn`. It is also possible to debug the application from ADT Bundle: if `<debug>true</debug>` is present in the `pom.xml`, just open ADT Bundle in debug mode and run the application using `mvn ... android:run`.
+
+Upgrading the ADT Bundle is a complex operation.
+
+### Following the tutorial
 
 [Starting Another Activity](<http://developer.android.com/training/basics/firstapp/starting-activity.html>)
 
-*ActionBarActivity* is a class contained in the library *appcompat-v7* (not in *appcompat-v4*). Since this library is not available in the Maven Central Repository, we need to install it in the local repository, by following these steps:
+Everithing works if the new activity class extend from  `Activity`; No
+way using `ActionBarActivity` with Maven (it works in a ADT project).
+
+`ActionBarActivity` is a class contained in the library `appcompat-v7`.
+Since this library is not available in the Maven Central Repository, we
+need to install it in the local repository. First of all, we have to
+download the *Android Support Repository*:
 
 - in *Android SDK Manager*, select and install *Android Support Repository*: note that the new directory `$ANDROID_HOME/extras/android/m2repository` has been created;
-- execute in the shell:
 
-```
-cd $ANDROID_HOME/extras/android/m2repository
-unzip com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.aar classes.jar
+Then we have two possibilities:
 
-# see in the com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom that support-v4 is needed
-mvn install:install-file -Dfile="./com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar" -DpomFile="./com/android/support/support-v4/19.1.0/support-v4-19.1.0.pom" -Dpackaging="jar"
+- we can use the libraries where they have been downloaded, adding a
+  `<repository>` tag to the application `pom.xml`;
+- we can duplicate them into the local `~/.m2/repository`.
 
-# this combo .jar+.apklib is deprecated
-#mv classes.jar com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.jar
-#mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.jar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="jar"
-#mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.aar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="apklib"
+In any case, also trying both with the `jar` and the `aar`, Maven
+installes the library into the `apk` and Eclipse reads it for the
+auto-completion service, but the app crashes when the class
+`ActionBarActivity` is instatiated.
 
-# this solution with the .aar doesn't work
-#mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.aar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="aar"
+Maven works fine with other libraries and `appcompat-v7` is correctly
+used in an ADT project: for now, let's go on without `appcompat-v7`.
 
-mvn install:install-file -Dfile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.jar" -DpomFile="./com/android/support/appcompat-v7/19.1.0/appcompat-v7-19.1.0.pom" -Dpackaging="jar"
-```
+### Following the tutorial
 
-- add these the library to the `pom.xml` (other guides suggest a combination of a .jar+.apklib, but it doesn't work; same for .aar, so let's try the .jar alone)
-- use `import android.support.v7.app.*;` in the code (ADT Bundle doesn't suggest it due to partial Maven support).
+[Adding the Action Bar](<http://developer.android.com/training/basics/actionbar/index.html>)
 
-Trubleshooting:
-
-- the application crashes on `super.onCreate` in `DisplayMessageActivity` class: debugging time. Works if `DisplayMessageActivity` is `android.app.Activity`, not if an `android.support.v7.app.ActionBarActivity`, or if in an ADT Bundle's project: probably the `appcompat-v7` library gets lost in the Maven deploy process. TODO: investigate).

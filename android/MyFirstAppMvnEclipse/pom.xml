@@ -8,10 +8,18 @@
   <packaging>apk</packaging>
   <name>MyFirstAppMvnEclipse</name>
 
+  <repositories>
+    <repository>
+      <id>android-support</id>
+      <url>file://${android.home}/extras/android/m2repository</url>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <platform.version>4.1.1.4</platform.version>
     <android.plugin.version>3.8.2</android.plugin.version>
+    <android.home>/opt/double-m/adt-bundle/sdk</android.home>
   </properties>
 
   <dependencies>
@@ -26,7 +34,7 @@
       <artifactId>myfirstlibmvn</artifactId>
       <version>1.0.0</version>
     </dependency>
-    </dependencies>
+  </dependencies>
 
   <build>
     <finalName>${project.artifactId}</finalName>
