@@ -8,9 +8,22 @@
     android:paddingTop="?android:attr/actionBarSize" >
 
     <fragment
-        android:id="@+id/button_fragment"
-        android:layout_width="match_parent"
+        android:id="@+id/image_fragment_left"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
+        class="com.marcellomessori.ImageFragment" />
+
+    <fragment
+        android:id="@+id/button_fragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         class="com.marcellomessori.MessageFragment" />
-    
+
+    <fragment
+        android:id="@+id/image_fragment_right"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        class="com.marcellomessori.ImageFragment" />
+
 </LinearLayout>

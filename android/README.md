@@ -260,5 +260,7 @@ used in an ADT project: for now, let's go on without `appcompat-v7`.
 
 [Adding the Action Bar](<http://developer.android.com/training/basics/actionbar/index.html>) done.
 
-[Supporting Different Devices](<http://developer.android.com/training/basics/supporting-devices/index.htm>) *TODO*.
+[Supporting Different Devices](<http://developer.android.com/training/basics/supporting-devices/index.html>) done.
+
+[Managing the Activity Lifecycle](<http://developer.android.com/training/basics/activity-lifecycle/index.html>) *TODO*.
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">La mia prima App Android</string>
+    <string name="edit_message">Inserisci un messaggio</string>
+    <string name="button_send">Invia</string>
+    <string name="hello_world">Ciao mondo!</string>
+    <string name="title_activity_display_message">Mostra il messaggio</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_search">Ricerca</string>
+    
+</resources>
