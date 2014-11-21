@@ -1,7 +1,6 @@
 package com.marcellomessori;
 
 import com.marcellomessori.R;
-import com.marcellomessori.R.layout;
 
 import android.app.Fragment;
 import android.os.Bundle;

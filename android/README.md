@@ -262,5 +262,9 @@ used in an ADT project: for now, let's go on without `appcompat-v7`.
 
 [Supporting Different Devices](<http://developer.android.com/training/basics/supporting-devices/index.html>) done.
 
-[Managing the Activity Lifecycle](<http://developer.android.com/training/basics/activity-lifecycle/index.html>) *TODO*.
+[Notifying the User](<https://developer.android.com/training/notify-user/index.html>) done.
+
+[Managing the Activity Lifecycle](<http://developer.android.com/training/basics/activity-lifecycle/index.html>) done.
+
+[Building a Dynamic UI with Fragments](<http://developer.android.com/training/basics/fragments/index.html>) *TODO*.
 
