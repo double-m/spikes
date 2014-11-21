@@ -8,5 +8,7 @@
     <string name="title_activity_display_message">Display The Message</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
+    <string name="connected_usb_message">Connected to a USB storage device</string>
+    <string name="connected_ac_message">Connected to a USB charger</string>
     
 </resources>
