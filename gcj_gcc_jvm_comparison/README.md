@@ -27,3 +27,16 @@ Or:
 user@linuxbox$ ./compare.sh --task=just_build
 user@linuxbox$ ./compare.sh --task=just_run
 ```
+
+### Results
+
+In my Linux box, with this algorith and no further investigation, it seems that:
+-	the compiled Java is better than JVM on small tasks e worst on big tasks;
+-	it makes no significant difference compiling Java from the Java code or from the byte code;
+-	the compiled C has always the best performaces, expecially for small tasks.
+
+(Linux 3.16.0-4-amd64, OpenJDK 1.7, gcc-4.9 and gcj-4.9)
+
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_numbers_with_a_lot_of_factors.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_powers_of_ten.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_prime_numbers.png)
