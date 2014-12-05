@@ -1,6 +1,6 @@
-# JVM, GCJ, GCC performance
+## JVM, GCJ, GCC performance
 
-## Which performs better in finding all factors of an integer number?
+### Which performs better in finding all factors of an integer number?
 
 Edit and execute `compare.sh` in a bash environment. If unchanged, it will:
 
