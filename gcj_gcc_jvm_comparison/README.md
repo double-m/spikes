@@ -42,3 +42,5 @@ In my Linux box, with this algorith and no further investigation, it seems that:
 ![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_numbers_with_a_lot_of_factors.png)
 ![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_powers_of_ten.png)
 ![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_prime_numbers.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_php_sucks.png)
+
