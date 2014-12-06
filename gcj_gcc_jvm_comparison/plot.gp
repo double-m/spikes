@@ -10,7 +10,7 @@ set title "Comparison showing that PHP sucks"
 set key font ",9"
 
 set auto x
-set xlabel "Divisors (powers of ten)"
+set xlabel "Dividends (powers of ten)"
 set xlabel font ",9"
 set xtics font ",9"
 set ytics font ",9"
