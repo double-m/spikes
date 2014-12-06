@@ -4,14 +4,47 @@
 
 BUILD=yes;
 RUN=yes;
+
+# comment blocks you don't want to execute
+
+declare -A MYLANG_JVM;
+MYLANG_JVM[title]="JVM"
+MYLANG_JVM[build]="javac FindFactors.java"
+MYLANG_JVM[run]="java FindFactors"
+
+declare -A MYLANG_GCJFROMCODE;
+MYLANG_GCJFROMCODE[title]="GCJ From Code"
+MYLANG_GCJFROMCODE[build]="gcj-4.9 --main=FindFactors FindFactors.java -o FindFactorsGcjFromCode.elf"
+MYLANG_GCJFROMCODE[run]="./FindFactorsGcjFromCode.elf"
+
+declare -A MYLANG_GCJFROMBYTECODE;
+MYLANG_GCJFROMBYTECODE[title]="GCJ From Byte Code"
+MYLANG_GCJFROMBYTECODE[build]="javac FindFactors.java && gcj-4.9 --main=FindFactors FindFactors.class -o FindFactorsGcjFromByteCode.elf"
+MYLANG_GCJFROMBYTECODE[run]="./FindFactorsGcjFromByteCode.elf"
+
+declare -A MYLANG_GCC;
+MYLANG_GCC[title]="GCC"
+MYLANG_GCC[build]="gcc-4.9 FindFactors.c -o FindFactorsGcc.elf"
+MYLANG_GCC[run]="./FindFactorsGcc.elf"
+
+declare -A MYLANG_PHP;
+MYLANG_PHP[title]="PHP"
+MYLANG_PHP[run]="php FindFactors.php"
+
+declare -A MYLANG_JS;
+MYLANG_JS[title]="JS"
+MYLANG_JS[run]="node FindFactors"
+
 NUMBERS_PowersOfTen="10 100 1000 10000 100000 1000000 10000000 100000000 1000000000";
 NUMBERS_ALotOfFactors="12 120 1200 12120 121200 1212000 12121200 121212000 1212120000";
 NUMBERS_Prime="7 71 701 7001 70001 700001 7000003 70000027 700000001";
+
 SEPARATOR_HEADER=","
 SEPARATOR_BODY=$SEPARATOR_HEADER
-COMPILER_JAVA="javac"
-COMPILER_GCJ="gcj-4.9"
-COMPILER_GCC="gcc-4.9"
+
+#
+# arguments
+#
 
 case $# in
 	0) ;;
@@ -27,40 +60,58 @@ if test "${arg1:0:7}" == "--task="; then
 	fi
 fi
 
-if test "$BUILD" == "yes"; then
-	javac FindFactors.java
-	$COMPILER_GCJ --main=FindFactors FindFactors.java -o FindFactorsGcjFromCode.elf
-	$COMPILER_GCJ --main=FindFactors FindFactors.class -o FindFactorsGcjFromByteCode.elf
-	$COMPILER_GCC FindFactors.c -o FindFactorsGcc.elf
-fi
+#
+# functions
+#
 
-function compare_durations {
-	echo -e "${1}${SEPARATOR_HEADER}Duration JVM${SEPARATOR_HEADER}Duration GCJ From Code${SEPARATOR_HEADER}Duration GCJ From Byte Code${SEPARATOR_HEADER}Duration GCC"
+function generateHeader {
+	typeOfNumber=$1
+
+	echo -en "${typeOfNumber}"
+	for mylang in ${!MYLANG_*}; do
+		mylang_title_var=$mylang[title];
+		mylang_title=${!mylang_title_var}
+		[ "$mylang_title" != "" ] && echo -en "${SEPARATOR_HEADER}Duration ${mylang_title}"
+	done
+	echo
+}
+
+function compareDurations {
+	typeOfNumber=$1
 	shift
 
+	generateHeader $typeOfNumber
+
 	for number in $@; do
-		start=$(($(date +%s%N)/1000000))
-		java FindFactors $number > /dev/null
-		duration_java="$(($(($(date +%s%N)/1000000))-start))"
-
-		start=$(($(date +%s%N)/1000000))
-		./FindFactorsGcjFromCode.elf $number > /dev/null
-		duration_gcj_from_byte_code="$(($(($(date +%s%N)/1000000))-start))"
-
-		start=$(($(date +%s%N)/1000000))
-		./FindFactorsGcjFromByteCode.elf $number > /dev/null
-		duration_gcj_from_code="$(($(($(date +%s%N)/1000000))-start))"
-
-		start=$(($(date +%s%N)/1000000))
-		./FindFactorsGcc.elf $number > /dev/null
-		duration_gcc="$(($(($(date +%s%N)/1000000))-start))"
-
-		echo -e "${number}${SEPARATOR_BODY}${duration_java}${SEPARATOR_BODY}${duration_gcj_from_code}${SEPARATOR_BODY}${duration_gcj_from_byte_code}${SEPARATOR_BODY}${duration_gcc}"
+		echo -en "${number}"
+		for mylang in ${!MYLANG_*}; do
+			mylang_run_var=$mylang[run];
+			mylang_run=${!mylang_run_var}
+			if test "$mylang_run" != ""; then
+				start=$(($(date +%s%N)/1000000))
+				$mylang_run $number > /dev/null
+				echo -en "${SEPARATOR_BODY}$(($(($(date +%s%N)/1000000))-start))"
+			fi
+		done
+		echo
 	done
 }
 
-if test "$RUN" == "yes"; then
-	for numbers in ${!NUMBERS_*}; do
-		compare_durations ${numbers:8} ${!numbers}
+#
+# operations
+#
+
+if test "$BUILD" == "yes"; then
+	for mylang in ${!MYLANG_*}; do
+		mylang_build_var=$mylang[build];
+		mylang_build=${!mylang_build_var}
+		[ "$mylang_build" != "" ] && eval $mylang_build
 	done
 fi
+
+if test "$RUN" == "yes"; then
+	for numbers in ${!NUMBERS_*}; do
+		compareDurations ${numbers:8} ${!numbers}
+	done
+fi
+
