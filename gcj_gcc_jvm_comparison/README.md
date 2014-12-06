@@ -39,6 +39,6 @@ In my Linux box, with this algorith and no further investigation, it seems that:
 
 (Linux 3.16.0-4-amd64, OpenJDK 1.7, gcc-4.9, gcj-4.9, NodeJS v0.10.26, PHP 5.6.2-1 (cli))
 
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_numbers_with_a_lot_of_factors.png)
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_powers_of_ten.png)
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/istograms/comparison_using_prime_numbers.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_numbers_with_a_lot_of_factors.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_powers_of_ten.png)
+![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_prime_numbers.png)
