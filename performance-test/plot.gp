@@ -5,13 +5,13 @@ set style fill solid 0.50 border 0
 set style data histogram
 set style histogram cluster gap 1
 
-set title "Comparison of all languages using only one dividend"
+set title "Comparison between executables in different languages"
 
 set key left Left reverse
 set key font ",9"
 
 set auto x
-set xlabel "Dividend"
+set xlabel "Dividends"
 set xlabel font ",9"
 set xtics font ",9"
 set ytics font ",9"

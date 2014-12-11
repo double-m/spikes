@@ -2,7 +2,7 @@
 
 ### Which performs better in finding all factors of an integer number?
 
-Edit and execute `compare.sh` in a bash environment. If unchanged, it will:
+Edit and execute `compare.sh` in a bash environment. For example, it can:
 
 -	generate
 	- the Java byte code (with javac),
@@ -15,10 +15,12 @@ Edit and execute `compare.sh` in a bash environment. If unchanged, it will:
 	- some prime numbers (one per OdM);
 -	output the results in CSV format.
 
-Usage:
+The output can be used to generate an histogram with GNUplot.
+
+Basic usage:
 
 ```
-user@linuxbox$ ./compare.sh
+user@linuxbox$ ./compare.sh 
 ```
 
 Or:
@@ -28,19 +30,25 @@ user@linuxbox$ ./compare.sh --task=just_build
 user@linuxbox$ ./compare.sh --task=just_run
 ```
 
+Complete usage:
+
+```
+user@linuxbox$ ./compare.sh > results.csv && gnuplot plot.gp # histogram.png
+```
+
 ### Results
 
-In my Linux box, with this algorith and no further investigation, it seems that:
+In my Linux box, with this algorithm and no further investigation, it seems that:
+-	C has always the best performaces, expecially for small tasks;
+-	NodeJS is always fine;
+-	JVM is a bit slower than Node;
+-	PHP and Python are far slower on big tasks, but quicker on small tasks (only after C).
+Besides:
 -	the compiled Java is better than JVM on small tasks e worst on big tasks;
 -	it makes no significant difference compiling Java from the Java code or from the byte code;
--	the compiled C has always the best performaces, expecially for small tasks;
--	NodeJS is not bad;
--	PHP is far slower, both as CLI command and as Apache HTTPD module.
+-	it makes no significant difference using PHP as CLI command or as Apache HTTPD module.
 
-(Linux 3.16.0-4-amd64, OpenJDK 1.7, gcc-4.9, gcj-4.9, NodeJS v0.10.26, PHP 5.6.2-1 (cli))
+(Linux 3.16.0-4-amd64, OpenJDK 1.7, gcc-4.9, gcj-4.9, NodeJS v0.10.26, PHP 5.6.2-1, Python 2.7.8)
 
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_numbers_with_a_lot_of_factors.png)
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_powers_of_ten.png)
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_using_prime_numbers.png)
-![](https://raw.githubusercontent.com/double-m/spikes/master/gcj_gcc_jvm_comparison/histograms/comparison_all.png)
+![](histograms/comparison_all.png)
 
