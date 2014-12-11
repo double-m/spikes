@@ -1,6 +1,7 @@
 <?php
 
-$usage = "Usage: php {$argv[0]} <INTEGER>";
+if (empty($usage))
+	$usage = "Usage: php {$argv[0]} <INTEGER>";
 
 if(!checkArgs($argv)) {
 	echo "$usage\n";
@@ -11,7 +12,8 @@ $dividend = $argv[1];
 
 $factors = findFactors($dividend);
 echo '[' . join(', ', $factors) . "]\n";
-exit(0);
+
+
 
 function checkArgs($argv) {
 	if (count($argv) < 2) {
