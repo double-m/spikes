@@ -23,7 +23,7 @@ Basic usage:
 user@linuxbox$ ./compare.sh 
 ```
 
-Or:
+Or just:
 
 ```
 user@linuxbox$ ./compare.sh --task=just_build
@@ -43,6 +43,7 @@ In my Linux box, with this algorithm and no further investigation, it seems that
 -	NodeJS is always fine;
 -	JVM is a bit slower than Node;
 -	PHP and Python are far slower on big tasks, but quicker on small tasks (only after C).
+
 Besides:
 -	the compiled Java is better than JVM on small tasks e worst on big tasks;
 -	it makes no significant difference compiling Java from the Java code or from the byte code;
