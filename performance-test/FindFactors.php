@@ -1,14 +1,15 @@
 <?php
 
-if (empty($usage))
+if (empty($usage)) {
 	$usage = "Usage: php {$argv[0]} <INTEGER>";
+}
 
 if(!checkArgs($argv)) {
 	echo "$usage\n";
 	exit(1);
 }
 
-$dividend = $argv[1];
+$dividend = get_numeric($argv[1]);
 
 $factors = findFactors($dividend);
 echo '[' . join(', ', $factors) . "]\n";
