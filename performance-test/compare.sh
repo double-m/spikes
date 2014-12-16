@@ -12,15 +12,15 @@ MYLANG_JVM[title]="JVM"
 MYLANG_JVM[build]="javac FindFactors.java"
 MYLANG_JVM[run]="java FindFactors INTEGER"
 
-#declare -A MYLANG_GCJFROMCODE;
-#MYLANG_GCJFROMCODE[title]="GCJ From Code"
-#MYLANG_GCJFROMCODE[build]="gcj-4.9 --main=FindFactors FindFactors.java -o FindFactorsGcjFromCode.elf"
-#MYLANG_GCJFROMCODE[run]="./FindFactorsGcjFromCode.elf INTEGER"
+declare -A MYLANG_GCJFROMCODE;
+MYLANG_GCJFROMCODE[title]="GCJ From Code"
+MYLANG_GCJFROMCODE[build]="gcj-4.9 --main=FindFactors FindFactors.java -o FindFactorsGcjFromCode.elf"
+MYLANG_GCJFROMCODE[run]="./FindFactorsGcjFromCode.elf INTEGER"
 
-#declare -A MYLANG_GCJFROMBYTECODE;
-#MYLANG_GCJFROMBYTECODE[title]="GCJ From Byte Code"
-#MYLANG_GCJFROMBYTECODE[build]="javac FindFactors.java && gcj-4.9 --main=FindFactors FindFactors.class -o FindFactorsGcjFromByteCode.elf"
-#MYLANG_GCJFROMBYTECODE[run]="./FindFactorsGcjFromByteCode.elf INTEGER"
+declare -A MYLANG_GCJFROMBYTECODE;
+MYLANG_GCJFROMBYTECODE[title]="GCJ From Byte Code"
+MYLANG_GCJFROMBYTECODE[build]="javac FindFactors.java && gcj-4.9 --main=FindFactors FindFactors.class -o FindFactorsGcjFromByteCode.elf"
+MYLANG_GCJFROMBYTECODE[run]="./FindFactorsGcjFromByteCode.elf INTEGER"
 
 declare -A MYLANG_GCC;
 MYLANG_GCC[title]="GCC"
@@ -37,7 +37,13 @@ MYLANG_PHP_CLI[run]="php FindFactors.php INTEGER"
 
 declare -A MYLANG_PYTHON;
 MYLANG_PYTHON[title]="Python"
-MYLANG_PYTHON[run]="python FindFactors.py INTEGER"
+MYLANG_PYTHON[run]="python3.4 FindFactors.py INTEGER"
+
+declare -A MYLANG_PYTHON_COMPILED;
+compiled_pyc="__pycache__/FindFactors.cpython-34.pyc"
+MYLANG_PYTHON_COMPILED[title]="Python Compiled"
+MYLANG_PYTHON_COMPILED[build]="py3compile FindFactors.py && chmod +x $compiled_pyc"
+MYLANG_PYTHON_COMPILED[run]="$compiled_pyc INTEGER"
 
 declare -A MYLANG_JS;
 MYLANG_JS[title]="NodeJS"

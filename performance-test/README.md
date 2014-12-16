@@ -46,9 +46,10 @@ In my Linux box, with this algorithm and no further investigation, it seems that
 Besides:
 -	the compiled Java is better than JVM on small tasks e worst on big tasks;
 -	it makes no significant difference compiling Java from the Java code or from the byte code;
+-	it makes no significant difference using inpterpreted Python or its byte code;
 -	it makes no significant difference using PHP as CLI command or as Apache HTTPD module.
 
 (Linux 3.16.0-4-amd64, OpenJDK 1.7, gcc-4.9, gcj-4.9, NodeJS v0.10.26, PHP 5.6.2-1, Python 2.7.8)
 
-![](histograms/comparison_all.png)
+![](histograms/comparison_almost_all.png)
 
