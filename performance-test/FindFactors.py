@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3.4
 
 import sys
 
@@ -6,7 +6,7 @@ usage = 'Usage: python ' + str(sys.argv[0]) + ' <INTEGER>';
 
 def checkArgs(argv):
 	if len(argv) < 2:
-		print 'is zero'
+		print ('is zero')
 		return False
 	argv1 = argv[1].strip()
 	try:
@@ -29,10 +29,10 @@ def findFactors(dividend):
 	return factors
 
 if not checkArgs(sys.argv):
-	print usage
+	print (usage)
 	sys.exit(1)
 
 dividend = int(sys.argv[1])
 
 factors = findFactors(dividend);
-print factors
+print (factors)
