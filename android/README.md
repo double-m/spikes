@@ -266,5 +266,19 @@ used in an ADT project: for now, let's go on without `appcompat-v7`.
 
 [Managing the Activity Lifecycle](<http://developer.android.com/training/basics/activity-lifecycle/index.html>) done.
 
+### Changed from Maven to Gradle
+
+If more than one device is attached, here's how to specify which device to deploy to:
+
+```
+user@linuxbox:/path/to/myapp$ adb devices
+List of devices attached 
+xxxxxxxxxxxxxx device
+yyyyyyyyyyyyyy device
+
+user@linuxbox:/path/to/myapp$ export ANDROID_SERIAL=xxxxxxxxxxxxxx
+user@linuxbox:/path/to/myapp$ ./gradlew installDebug
+```
+
 [Building a Dynamic UI with Fragments](<http://developer.android.com/training/basics/fragments/index.html>) *TODO*.
 
