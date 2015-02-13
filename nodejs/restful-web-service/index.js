@@ -5,6 +5,7 @@ var http = require('http')
   , items = [];
 
 server = http.createServer(function(req, res){
+  
     function getIndexFromId(id) {
       return items.map(function(item){
         return item.id;
@@ -14,7 +15,26 @@ server = http.createServer(function(req, res){
     function displayItem(index) {
       return items[index].id + ') ' + items[index].name + '\n';
     }
+    
+    function getIndexFromUrl(url) {
+
+      var path = url.parse(req.url).pathname
+        , id = parseInt(path.slice(1), 10)
+        , index;
+
+      if(isNaN(id)) {
+        return {'index': false, err: {status: 400, message: 'Invalid item ID\n'}};
+      }
+
+      index = getIndexFromId(id);
+
+      if(index === -1) {
+        return {'index': false, err: {status: 404, message: 'Item not found\n'}};
+      }
       
+      return {'index': index, err: {}};
+    }
+    
     switch (req.method) {
 
     case 'POST':
@@ -28,12 +48,8 @@ server = http.createServer(function(req, res){
       req.on('end', function(){
         ++itemCounter;
         items.push({id: itemCounter, name: item});
-        onPostEnd(itemCounter);
+        res.end(displayItem(getIndexFromId(itemCounter)));
       });
-
-      function onPostEnd(id) {
-        res.end(displayItem(getIndexFromId(id)));
-      }
       
       break;
 
@@ -52,28 +68,41 @@ server = http.createServer(function(req, res){
 
     case 'DELETE':
 
-      var path = url.parse(req.url).pathname
-        , id = parseInt(path.slice(1), 10)
-        , index;
+      var parsedUrl = getIndexFromUrl(url)
+        , item = '';
 
-      if(isNaN(id)) {
-        res.statusCode = 400;
-        res.end('Invalid item ID\n');
+      if (parsedUrl.err.status) {
+        res.statusCode = parsedUrl.err.status;
+        res.end(parsedUrl.err.message);
         break;
       }
 
-      index = getIndexFromId(id);
-      
-      if(index === -1) {
-        res.statusCode = 404;
-        res.end('Item not found\n');
-        break;
-      }
-
-      items.splice(index, 1);
+      items.splice(parsedUrl.index, 1);
 
       res.end('OK\n');
 
+    case 'PUT':
+
+      var parsedUrl = getIndexFromUrl(url)
+        , item = '';
+
+      if (parsedUrl.err.status) {
+        res.statusCode = parsedUrl.err.status;
+        res.end(parsedUrl.err.message);
+        break;
+      }
+
+      req.setEncoding('utf8');
+      req.on('data', function(chunk){
+        item += chunk;
+      });
+      req.on('end', function(){
+        items[parsedUrl.index].name = item;
+        res.end(displayItem(parsedUrl.index));
+      });
+      
+      break;
+      
     default:
 
       res.statusCode = 405;
