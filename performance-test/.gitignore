@@ -1,2 +1,6 @@
+__pycache__/
+
 *.class
 *.elf
+results.csv
+histogram.png

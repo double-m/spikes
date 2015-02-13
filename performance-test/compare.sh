@@ -7,11 +7,6 @@ RUN=yes;
 
 # comment blocks you don't want to execute
 
-declare -A MYLANG_JVM;
-MYLANG_JVM[title]="JVM"
-MYLANG_JVM[build]="javac FindFactors.java"
-MYLANG_JVM[run]="java FindFactors INTEGER"
-
 declare -A MYLANG_GCJFROMCODE;
 MYLANG_GCJFROMCODE[title]="GCJ From Code"
 MYLANG_GCJFROMCODE[build]="gcj-4.9 --main=FindFactors FindFactors.java -o FindFactorsGcjFromCode.elf"
@@ -26,6 +21,15 @@ declare -A MYLANG_GCC;
 MYLANG_GCC[title]="GCC"
 MYLANG_GCC[build]="gcc-4.9 FindFactors.c -o FindFactorsGcc.elf"
 MYLANG_GCC[run]="./FindFactorsGcc.elf INTEGER"
+
+declare -A MYLANG_JVM;
+MYLANG_JVM[title]="JVM"
+MYLANG_JVM[build]="javac FindFactors.java"
+MYLANG_JVM[run]="java FindFactors INTEGER"
+
+declare -A MYLANG_NODEJS;
+MYLANG_NODEJS[title]="NodeJS"
+MYLANG_NODEJS[run]="node FindFactors INTEGER"
 
 declare -A MYLANG_PHP_CLI;
 MYLANG_PHP_CLI[title]="PHP CLI"
@@ -45,9 +49,9 @@ MYLANG_PYTHON_COMPILED[title]="Python Compiled"
 MYLANG_PYTHON_COMPILED[build]="py3compile FindFactors.py && chmod +x $compiled_pyc"
 MYLANG_PYTHON_COMPILED[run]="$compiled_pyc INTEGER"
 
-declare -A MYLANG_JS;
-MYLANG_JS[title]="NodeJS"
-MYLANG_JS[run]="node FindFactors INTEGER"
+declare -A MYLANG_XPERL;
+MYLANG_XPERL[title]="Perl"
+MYLANG_XPERL[run]="./FindFactors.pl INTEGER"
 
 #NUMBERS_PowersOfTen="10 100 1000 10000 100000 1000000 10000000 100000000 1000000000";
 #NUMBERS_ALotOfFactors="12 120 1200 12120 121200 1212000 12121200 121212000 1212120000";
