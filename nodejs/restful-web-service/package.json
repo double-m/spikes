@@ -1,0 +1,19 @@
+{
+  "name": "restful-web-service",
+  "version": "1.0.0",
+  "description": "RESTful web service, as suggested in the book Node.js in Action",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://double-m@github.com/double-m/spikes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/double-m/spikes/issues"
+  },
+  "homepage": "https://github.com/double-m/spikes"
+}
