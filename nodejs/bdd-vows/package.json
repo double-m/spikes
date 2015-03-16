@@ -1,5 +1,5 @@
 {
-  "name": "vows-bdd-spike",
+  "name": "bdd-vows-spike",
   "description": "Trying Vows for testing",
   "version": "0.0.1",
   "dependencies": {

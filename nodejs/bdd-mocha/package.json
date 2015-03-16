@@ -1,0 +1,14 @@
+{
+  "name": "bdd-mocha-spike",
+  "description": "Trying Mocha for testing",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "node ./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  }
+}
