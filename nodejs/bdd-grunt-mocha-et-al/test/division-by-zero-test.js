@@ -1,12 +1,12 @@
-var assert = require('assert')
+var expect = require('chai').expect
   , myDivision = require('../lib/app.js');
 
-describe('Division by Zero', function() {
+describe('Division by Zero -', function() {
 
   describe('when dividing a number by zero', function() {
 
     it('should get Infinity', function() {
-      assert.equal(myDivision(42, 0), Infinity);
+      expect(myDivision(42, 0)).to.be.Infinity;
     });
 
   });
@@ -15,11 +15,11 @@ describe('Division by Zero', function() {
     var result = myDivision(0, 0);
 
     it('is not a number', function () {
-      assert.notStrictEqual(NaN, result);
+      expect(result).to.not.be.NaN;
     });
 
     it('is not equal to itself', function () {
-      assert.notEqual(result, result);
+      expect(result).to.not.be.result;
     });
 
   });
