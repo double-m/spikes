@@ -1,0 +1,19 @@
+{
+  "name": "@double-m/how-to-npm",
+  "version": "1.0.0",
+  "description": "how-to-npm workshop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/double-m/spikes/tree/master/nodeschool/how-to-node"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "double-m",
+  "license": "ISC",
+  "dependencies": {
+    "@linclark/pkg": "^1.0.2"
+  },
+  "devDependencies": {}
+}
