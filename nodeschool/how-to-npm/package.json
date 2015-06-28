@@ -1,6 +1,6 @@
 {
   "name": "@double-m/how-to-npm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "how-to-npm workshop",
   "repository": {
     "type": "git",
@@ -12,8 +12,6 @@
   },
   "author": "double-m",
   "license": "ISC",
-  "dependencies": {
-    "@linclark/pkg": "^1.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
