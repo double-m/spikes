@@ -26,7 +26,7 @@ async.waterfall([
       response.on('end', function() {
         cb(null, body);
       }).on('error', function(err) {
-        cb(e);
+        cb(err);
       });
     });
   }
