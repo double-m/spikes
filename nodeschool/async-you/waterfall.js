@@ -6,16 +6,16 @@ var urlFile = process.argv[2];
 
 async.waterfall([
 
-  function(cb) {
+  function(done) {
 
     fs.readFile(urlFile, function (err, data) {
-      if (err) cb(err);
+      if (err) done(err);
 
-      cb(null, data.toString());
+      done(null, data.toString());
     });
   },
 
-  function(url, cb) {
+  function(url, done) {
     http.get(url, function (response) {
       var body = '';
 
@@ -24,10 +24,10 @@ async.waterfall([
       });
 
       response.on('end', function() {
-        cb(null, body);
-      }).on('error', function(err) {
-        cb(err);
-      });
+        done(null, body);
+      })
+    }).on('error', function(err) {
+      done(err);
     });
   }
 

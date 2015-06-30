@@ -14,9 +14,9 @@ function fetchUrl(url, done) {
 
     response.on('end', function() {
       done(null, body);
-    }).on('error', function(err) {
-      done(err);
-    });
+    })
+  }).on('error', function(err) {
+    done(err);
   });
 }
 
@@ -25,7 +25,6 @@ async.series({
   'requestOne': function(done) {
     fetchUrl(url1, done);
   },
-
 
   'requestTwo': function(done) {
     fetchUrl(url2, done);
