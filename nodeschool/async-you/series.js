@@ -1,11 +1,11 @@
 var http = require('http')
   , async = require('async');
 
-var url1 = process.argv[2];
-var url2 = process.argv[3];
+var url1 = process.argv[2]
+  , url2 = process.argv[3];
 
 function fetchUrl(url, done) {
-  http.get(url, function (response) {
+  http.get(url, function(response) {
     var body = '';
 
     response.on('data', function(chunk) {
