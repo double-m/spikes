@@ -9,8 +9,8 @@ return array(
     
     'router' => array(
         'routes' => array(
-            'root' => array(
-                'type' => 'segment',
+            'home' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(

@@ -13,9 +13,7 @@ class AlbumController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel(array(
-            'albums' => $this->getAlbumTable()->fetchAll()
-        ));
+        return array('albums' => $this->getAlbumTable()->fetchAll());
     }
 
     public function getAlbumTable()
@@ -81,6 +79,31 @@ class AlbumController extends AbstractActionController
         return array(
             'id'   => $id,
             'form' => $form,
+        );
+    }
+
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('album');
+        }
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+            
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->getAlbumTable()->deleteAlbum($id);
+            }
+
+            return $this->redirect()->toRoute('album');
+        }
+        
+        return array(
+            'id'    => $id,
+            'album' => $this->getAlbumTable()->getAlbum($id)
         );
     }
 
