@@ -1,11 +1,12 @@
 <?php
-$title = 'Add new album';
+$title = 'Edit album';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
-$form->setAttribute('action', $this->url('album', array('action' => 'add')));
+$form->setAttribute('action', $this->url('album',
+    array('action' => 'save', 'id' => $id)));
 $form->prepare();
 
 echo $this->form()->openTag($form);

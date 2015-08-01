@@ -10,24 +10,24 @@ use Album\Form\AlbumForm;
 class AlbumController extends AbstractActionController
 {
     protected $albumTable;
-    
+
     public function indexAction()
     {
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll()
         ));
     }
-    
+
     public function getAlbumTable()
     {
         if (!$this->albumTable) {
             $sm = $this->getServiceLocator();
             $this->albumTable = $sm->get('Album\Model\AlbumTable');
         }
-        
+
         return $this->albumTable;
     }
-    
+
     public function addAction()
     {
         $form = new AlbumForm();
@@ -38,16 +38,50 @@ class AlbumController extends AbstractActionController
             $album = new Album();
             $form->setInputFilter($album->getInputFilter());
             $form->setData($request->getPost());
-            
+
             if ($form->isValid()) {
                 $album->exchangeArray($form->getData());
                 $this->getAlbumTable()->saveAlbum($album);
-                
+
+                return $this->redirect()->toRoute('album');
+            }
+        }
+
+        return array('form' => $form);
+    }
+
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('album', array('action' => 'add'));
+        }
+        
+        try {
+            $album = $this->getAlbumTable()->getAlbum($id);
+        } catch (\Exception $ex) {
+            return $this->redirect()->toRoute('album', array('action' => 'index'));
+        }
+        
+        $form = new AlbumForm();
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($album->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->getAlbumTable()->saveAlbum($album);
+
                 return $this->redirect()->toRoute('album');
             }
         }
         
-        return array('form' => $form);
+        return array(
+            'id'   => $id,
+            'form' => $form,
+        );
     }
 
 }
