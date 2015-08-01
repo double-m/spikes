@@ -9,6 +9,16 @@ return array(
     
     'router' => array(
         'routes' => array(
+            'root' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/',
+                    'defaults' => array(
+                        'controller' => 'Album/Controller/Album',
+                        'action' => 'index'
+                    )
+                )
+            ),
             'album' => array(
                 'type' => 'segment',
                 'options' => array(
