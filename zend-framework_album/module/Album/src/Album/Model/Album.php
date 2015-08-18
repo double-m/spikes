@@ -3,7 +3,6 @@
 namespace Album\Model;
 
 use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
 class Album
@@ -55,10 +54,8 @@ class Album
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'
-                            => 1,
-                            'max'
-                            => 100,
+                            'min'      => 1,
+                            'max'      => 100,
                         ),
                     ),
                 ),
