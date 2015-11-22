@@ -14,7 +14,7 @@ MongoClient.connect(url, function(err, db) {
         $set: {
             age: newAge
         }
-    }, function(err, data) {
+    }, function(err) {
         if (err) throw err;
 
         db.close();
