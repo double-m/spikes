@@ -13,9 +13,7 @@ app.use(express.static('./public'));
 app.use( bodyParser.json() );
 
 app.get('/todos', function(req, res, next) {
-    var db = app.locals.db;
-    
-    var cursor = db.collection('todos').find();
+    var cursor = app.locals.db.collection('todos').find();
     
     cursor.toArray(function(req, todos) {
         res.send(todos);  
@@ -32,8 +30,7 @@ app.post('/todos', function(req, res, next) {
         return false;
     }
     
-    var db = app.locals.db;
-    db.collection('todos').insert({
+    app.locals.db.collection('todos').insert({
         task: task,
         completed: false
     }, function(err, result) {
@@ -55,8 +52,7 @@ app.put('/todos/:id', function(req, res, next) {
         return false;
     }
     
-    var db = app.locals.db;
-    db.collection('todos').update({
+    app.locals.db.collection('todos').update({
         _id: new ObjectID(id)
     }, {
         $set: {
@@ -65,6 +61,19 @@ app.put('/todos/:id', function(req, res, next) {
     }, function(err, result) {
         if(err) throw err;
         outputMessage = 'completed flag on task "' + id + '" has been set to ' + todo.completed + os.EOL;
+        res.status(200).send(outputMessage);
+        console.log(outputMessage);
+    });
+});
+
+app.delete('/todos/:id', function(req, res, next) {
+    var id = req.params.id;
+
+    app.locals.db.collection('todos').remove({
+        _id: new ObjectID(id)
+    }, function(err, result) {
+        if(err) throw err;
+        outputMessage = 'deleted task "' + id + '"' + os.EOL;
         res.status(200).send(outputMessage);
         console.log(outputMessage);
     });

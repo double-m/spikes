@@ -1,3 +1,16 @@
-.strike {
+.todo-list {
+    width: 400px;
+}
+.todo-item {
+    list-style: none;
+}
+.todo-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+.strike .task-body {
     text-decoration: line-through;
+}
+.task-body {
+    display: inline-block;
+    min-width: 300px;
 }

@@ -7,6 +7,7 @@ angular.module('meanTodo', [])
         main.newTaskText = '';
         main.addTask = addTask;
         main.updateTask = updateTask;
+        main.deleteTask = deleteTask;
 
         // initial population
         getTasks();
@@ -33,6 +34,17 @@ angular.module('meanTodo', [])
             });
         }
 
+        function deleteTask(id) {
+            $http({
+                method: 'DELETE',
+                url: '/todos/' + id
+            }).then(function (res) {
+                if (res.status === 200) {
+                    getTasks();
+                }
+            });
+        }
+
         function updateTask(todo) {
             $http({
                 method: 'PUT',
@@ -43,7 +55,9 @@ angular.module('meanTodo', [])
                     }
                 }
             }).then(function (res) {
-                getTasks();
+                if (res.status === 200) {
+                    getTasks();
+                }
             });
         }
 

@@ -15,11 +15,14 @@
         <input name="input" ng-model="main.newTaskText" />
         <input type="button" name="add" value="Add" ng-click="main.addTask()" />
 
-        <ul>
-            <li ng-repeat="todo in main.todos" ng-class="{strike: todo.completed}">
-                <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
-                {{ todo.task }}
-            </li>
-        </ul>
+        <div class="todo-list">
+            <ul>
+                <li ng-repeat="todo in main.todos" class="todo-item" ng-class="{strike: todo.completed}">
+                    <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
+                    <span class="task-body">{{ todo.task }}</span>
+                    <input type="button" value="x" ng-click="main.deleteTask(todo._id)" />
+                </li>
+            </ul>
+        </div>
     </body>
 </html>
