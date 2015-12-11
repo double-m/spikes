@@ -7,12 +7,20 @@ var app = express()
 
 app.use(express.static('./public'));
 
-app.get('/', function(req, res, next) {
-    res.send('hello');
+app.get('/todo', function(req, res, next) {
+    var db = app.locals.db;
+    
+    var cursor = db.collection('todo').find();
+    
+    cursor.toArray(function(req, todos) {
+        res.send(todos);  
+    });
 });
 
 MongoClient.connect(mongoUrl, function(err, db) {
     if (err) throw err;
+
+    app.locals.db = db;
 
     app.listen(webServerPort, function() {
         console.log('web server started on port', webServerPort);
