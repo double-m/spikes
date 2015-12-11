@@ -11,11 +11,12 @@
     <body ng-app="meanTodo" ng-controller="mainCtrl as main">
         <h1>todos</h1>
 
-        <input name="input" />
+        <input name="input" ng-model="main.newTodoText" />
+        <input type="button" name="add" value="Add" ng-click="main.addTodo()" />
 
         <ul>
             <li ng-repeat="todo in main.todos">
-                <input type="checkbox" />{{ todo }}
+                <input type="checkbox" />{{ todo.task }}
             </li>
         </ul>
     </body>
