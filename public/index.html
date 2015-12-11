@@ -16,7 +16,8 @@
 
         <ul>
             <li ng-repeat="todo in main.todos">
-                <input type="checkbox" />{{ todo.task }}
+                <input type="checkbox" ng-model="todo.completed" ng-click="main.updateCompleted(todo)" />
+                {{ todo.task }}
             </li>
         </ul>
     </body>

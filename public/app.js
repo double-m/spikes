@@ -2,7 +2,8 @@
 
 angular.module('meanTodo', [])
     .controller('mainCtrl', function($http) {
-        var main = this;
+        var main = this
+            main.completed;
 
         main.addTodo = function() {
             if (!main.newTodoText) return false;
@@ -28,12 +29,26 @@ angular.module('meanTodo', [])
             });
         };
 
+        main.updateCompleted = function(todo) {
+            $http({
+                method: 'PUT',
+                url: '/todos/' + todo._id,
+                data: {
+                    todo: {
+                        completed: todo.completed
+                    }
+                }
+            }).then(function (res) {
+                main.getTodos();
+            });
+        };
+
         main.getTodos = function() {
             $http.get('/todos').then(function(res) {
                 main.todos = res.data;
             });
-        }
-        
+        };
+
         // initial population
         main.getTodos();
     });

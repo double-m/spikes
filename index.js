@@ -1,7 +1,8 @@
 var express = require('express')
   , bodyParser = require('body-parser')
   , os = require('os')
-  , MongoClient = require('mongodb').MongoClient;
+  , MongoClient = require('mongodb').MongoClient
+  , ObjectID = require('mongodb').ObjectID;
 
 var app = express()
   , webServerPort = 3000
@@ -41,7 +42,32 @@ app.post('/todos', function(req, res, next) {
         res.status(201).send(outputMessage);
         console.log(outputMessage);
     });
+});
 
+app.put('/todos/:id', function(req, res, next) {
+    var todo = req.body.todo
+      , id = req.params.id;
+    
+    if (!todo) {
+        outputMessage = 'not updated task: ' + todo + os.EOL;
+        res.status(400).send(outputMessage);
+        console.log(outputMessage);
+        return false;
+    }
+    
+    var db = app.locals.db;
+    db.collection('todos').update({
+        _id: new ObjectID(id)
+    }, {
+        $set: {
+            completed: todo.completed
+        }
+    }, function(err, result) {
+        if(err) throw err;
+        outputMessage = 'completed flag on task "' + id + '" has been set to ' + todo.completed + os.EOL;
+        res.status(200).send(outputMessage);
+        console.log(outputMessage);
+    });
 });
 
 MongoClient.connect(mongoUrl, function(err, db) {
