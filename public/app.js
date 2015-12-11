@@ -1,8 +1,10 @@
 /* global angular */
 
 angular.module('meanTodo', [])
-    .controller('MainCtrl', function($http) {
+    .controller('mainCtrl', function($http) {
+        var main = this;
+      
         $http.get('/todo').then(function(res) {
-            console.log('meanTodo', res.data);
+            main.todos = res.data;
         });
     });

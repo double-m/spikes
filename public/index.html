@@ -2,12 +2,21 @@
 <html>
     <head>
         <title>TODO List</title>
-        <meta charset="utf-8" />
+        <meta   charset="utf-8" />
         <script src="components/bower-angularjs/angular.js"></script>
         <script src="app.js"></script>
+        <link   href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     </head>
         
-    <body ng-app="meanTodo" ng-controller="MainCtrl">
-        {{ 'hello' }}
+    <body ng-app="meanTodo" ng-controller="mainCtrl as main">
+        <h1>todos</h1>
+
+        <input name="input" />
+
+        <ul>
+            <li ng-repeat="todo in main.todos">
+                <input type="checkbox" />{{ todo }}
+            </li>
+        </ul>
     </body>
 </html>
