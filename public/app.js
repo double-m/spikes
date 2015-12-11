@@ -4,15 +4,12 @@ angular.module('meanTodo', [])
     .controller('mainCtrl', function($http) {
         var main = this;
 
-        main.newTaskText = '';
         main.addTask = addTask;
         main.updateTask = updateTask;
         main.deleteTask = deleteTask;
 
         // initial population
         getTasks();
-
-        main.filter = true;
 
         function addTask() {
             if (!main.newTaskText) return false;

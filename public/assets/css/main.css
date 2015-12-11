@@ -19,10 +19,11 @@
     padding: 5px 0;
 
 }
-.strike .task-body {
+.todo-completed .todo-task-body {
     text-decoration: line-through;
+    color: #aaa;
 }
-.task-body {
+.todo-task-body {
     display: inline-block;
     min-width: 300px;
 }

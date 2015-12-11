@@ -11,24 +11,9 @@
         
     <body ng-app="meanTodo" ng-controller="mainCtrl as main">
         <div class="todo-wrapper">
+
             <h1>todos</h1>
 
-            <div class="todo-newtask">
-                New task: 
-                <input name="input" ng-model="main.newTaskText" />
-                <input type="button" name="add" value="Add" ng-click="main.addTask()" />
-            </div>
-
-            <div class="todo-list">
-                <ul>
-                    <li ng-repeat="todo in main.todos | filter: { completed: main.filter }" class="todo-item" ng-class="{strike: todo.completed}">
-                        <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
-                        <span class="task-body">{{ todo.task }}</span>
-                        <input type="button" value="x" ng-click="main.deleteTask(todo._id)" />
-                    </li>
-                </ul>
-            </div>
-            
             <div class="todo-controls">
                 <input type="button" value="all"
                        ng-click="main.filter=undefined" />
@@ -37,6 +22,23 @@
                 <input type="button" value="completed"
                        ng-click="main.filter=true" />
             </div>
+
+            <div class="todo-list">
+                <ul>
+                    <li ng-repeat="todo in main.todos | filter: { completed: main.filter }" class="todo-item" ng-class="{'todo-completed': todo.completed}">
+                        <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
+                        <span class="todo-task-body">{{ todo.task }}</span>
+                        <input type="button" value="x" ng-click="main.deleteTask(todo._id)" />
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="todo-newtask">
+                new task: 
+                <input name="input" ng-model="main.newTaskText" />
+                <input type="button" name="add" value="Add" ng-click="main.addTask()" />
+            </div>
+
         </div>
     </body>
 </html>
