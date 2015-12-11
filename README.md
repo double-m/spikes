@@ -21,4 +21,6 @@ npm install nodemon --save-dev
 bower init
 touch .bowerrc # and add "directory": "public/components" to it
 bower install angular.js --save
+
+npm i -S mongodb
 ```
