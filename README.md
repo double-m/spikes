@@ -23,4 +23,12 @@ touch .bowerrc # and add "directory": "public/components" to it
 bower install angular.js --save
 
 npm i -S mongodb
+
+# implementation of the CRUD
+
+# api testing using supertest+mocha+chai (for e2e use selenium)
+npm i -D supertest mocha chai
+
+# write tests/api.spec.js
+node_modules/.bin/mocha tests/api.spec.js
 ```
