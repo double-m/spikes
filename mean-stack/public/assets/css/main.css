@@ -1,0 +1,29 @@
+.todo-wrapper {
+    margin: 50px auto;
+    width: 400px;
+}
+.todo-newtask,
+.todo-wrapper h1,
+.todo-wrapper .todo-controls {
+    padding-top: 10px;
+    text-align: center;
+}
+.todo-list {
+    margin-top: 10px;
+}
+.todo-item {
+    list-style: none;
+}
+.todo-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+
+}
+.todo-completed .todo-task-body {
+    text-decoration: line-through;
+    color: #aaa;
+}
+.todo-task-body {
+    display: inline-block;
+    min-width: 300px;
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TODO List</title>
+        <meta   charset="utf-8" />
+        <script src="components/bower-angularjs/angular.js"></script>
+        <script src="app.js"></script>
+        <link   href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link   href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    </head>
+        
+    <body ng-app="meanTodo" ng-controller="mainCtrl as main">
+        <div class="todo-wrapper">
+
+            <h1>todos</h1>
+
+            <div class="todo-controls">
+                <input type="button" value="all"
+                       ng-click="main.filter=undefined" />
+                <input type="button" value="to be done"
+                       ng-click="main.filter=false" />
+                <input type="button" value="completed"
+                       ng-click="main.filter=true" />
+            </div>
+
+            <div class="todo-list">
+                <ul>
+                    <li ng-repeat="todo in main.todos | filter: { completed: main.filter }" class="todo-item" ng-class="{'todo-completed': todo.completed}">
+                        <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
+                        <span class="todo-task-body">{{ todo.task }}</span>
+                        <input type="button" value="x" ng-click="main.deleteTask(todo._id)" />
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="todo-newtask">
+                new task: 
+                <input name="input" ng-model="main.newTaskText" />
+                <input type="button" name="add" value="Add" ng-click="main.addTask()" />
+            </div>
+
+        </div>
+    </body>
+</html>
