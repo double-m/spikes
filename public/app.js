@@ -11,7 +11,9 @@ angular.module('meanTodo', [])
 
         // initial population
         getTasks();
-        
+
+        main.filter = true;
+
         function addTask() {
             if (!main.newTaskText) return false;
 
