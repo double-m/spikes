@@ -17,4 +17,8 @@ npm install express --save
 npm install nodemon --save-dev
 
 # in production we avoid devDependecies using 'npm install --production'
+
+bower init
+touch .bowerrc # and add "directory": "public/components" to it
+bower install angular.js --save
 ```
