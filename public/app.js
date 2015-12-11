@@ -2,34 +2,38 @@
 
 angular.module('meanTodo', [])
     .controller('mainCtrl', function($http) {
-        var main = this
-            main.completed;
+        var main = this;
 
-        main.addTodo = function() {
-            if (!main.newTodoText) return false;
+        main.newTaskText = '';
+        main.addTask = addTask;
+        main.updateTask = updateTask;
 
-            console.log('sending', main.newTodoText);
-            
+        // initial population
+        getTasks();
+        
+        function addTask() {
+            if (!main.newTaskText) return false;
+
             $http({
                 method: 'POST',
                 url: '/todos',
                 data: {
-                    task: main.newTodoText,
+                    task: main.newTaskText,
                     completed: false
                 }
             }).then(function (res) {
                 if (res.status === 201) {
-                    main.getTodos();
+                    getTasks();
                 }
 
                 var consoleMessage = (res.status === 201)
-                    ? 'new task "' + main.newTodoText + '" has been stored'
+                    ? 'new task "' + main.newTaskText + '" has been stored'
                     : 'server response was "' + res.data + '" with http status ' + res.status;
                 console.log(consoleMessage);
             });
-        };
+        }
 
-        main.updateCompleted = function(todo) {
+        function updateTask(todo) {
             $http({
                 method: 'PUT',
                 url: '/todos/' + todo._id,
@@ -39,16 +43,13 @@ angular.module('meanTodo', [])
                     }
                 }
             }).then(function (res) {
-                main.getTodos();
+                getTasks();
             });
-        };
+        }
 
-        main.getTodos = function() {
+        function getTasks() {
             $http.get('/todos').then(function(res) {
                 main.todos = res.data;
             });
-        };
-
-        // initial population
-        main.getTodos();
+        }
     });

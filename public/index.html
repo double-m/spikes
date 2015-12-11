@@ -6,17 +6,18 @@
         <script src="components/bower-angularjs/angular.js"></script>
         <script src="app.js"></script>
         <link   href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link   href="assets/css/main.css" rel="stylesheet" type="text/css" />
     </head>
         
     <body ng-app="meanTodo" ng-controller="mainCtrl as main">
         <h1>todos</h1>
 
-        <input name="input" ng-model="main.newTodoText" />
-        <input type="button" name="add" value="Add" ng-click="main.addTodo()" />
+        <input name="input" ng-model="main.newTaskText" />
+        <input type="button" name="add" value="Add" ng-click="main.addTask()" />
 
         <ul>
-            <li ng-repeat="todo in main.todos">
-                <input type="checkbox" ng-model="todo.completed" ng-click="main.updateCompleted(todo)" />
+            <li ng-repeat="todo in main.todos" ng-class="{strike: todo.completed}">
+                <input type="checkbox" ng-model="todo.completed" ng-click="main.updateTask(todo)" />
                 {{ todo.task }}
             </li>
         </ul>
