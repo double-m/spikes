@@ -37,7 +37,7 @@ class Task
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="task", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="task", cascade={"persist", "remove"})
      */
     protected $tags;
 

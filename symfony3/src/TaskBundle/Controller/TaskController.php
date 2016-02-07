@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use TaskBundle\Entity\Task;
+use TaskBundle\Form\TaskType;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Task controller.
@@ -83,18 +85,31 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createForm('TaskBundle\Form\TaskType', $task);
+        $originalTags = new ArrayCollection();
+
+        foreach ($task->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
+        $editForm = $this->createForm(TaskType::class, $task);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($originalTags as $tag) {
+                if (false === $task->getTags()->contains($tag)) {
+                    $em->persist($tag);
+                    $em->remove($tag);
+                }
+            }
             $em->persist($task);
             $em->flush();
 
             return $this->redirectToRoute('task_edit', array('id' => $task->getId()));
         }
 
+        $deleteForm = $this->createDeleteForm($task);
         return $this->render('TaskBundle:task/edit.html.twig', array(
             'task' => $task,
             'edit_form' => $editForm->createView(),

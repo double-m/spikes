@@ -11,7 +11,7 @@ Start pointing a browser at [http://localhost:8000/task](<http://localhost:8000/
 What's in here:
 
 - a CRUD generated in a way similar to [this](<https://github.com/double-m/docs/blob/master/sysmfony_crud_from_scratch.md>);
-- (ongoing) a collection of forms embedded in a form, as described [here](<http://symfony.com/doc/current/cookbook/form/form_collections.html>).
+- a collection of forms embedded in a form, as described [here](<http://symfony.com/doc/current/cookbook/form/form_collections.html>).
 
 ### Requirements
 

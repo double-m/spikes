@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <style>li { list-style: none; }</style>
+        <style>
+            li { list-style: none; }
+            td, th { padding: 5px 10px !important; }
+        </style>
         <link rel="stylesheet" href="{{ asset('assets/common/css/bootstrap/bootstrap.min.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
