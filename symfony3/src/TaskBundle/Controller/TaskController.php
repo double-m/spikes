@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use TaskBundle\Entity\Task;
-use TaskBundle\Form\TaskType;
 
 /**
  * Task controller.
@@ -42,6 +41,7 @@ class TaskController extends Controller
     public function newAction(Request $request)
     {
         $task = new Task();
+
         $form = $this->createForm('TaskBundle\Form\TaskType', $task);
         $form->handleRequest($request);
 

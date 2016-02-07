@@ -5,6 +5,7 @@ namespace TaskBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class TaskType extends AbstractType
 {
@@ -16,7 +17,15 @@ class TaskType extends AbstractType
     {
         $builder
             ->add('title')
+
             ->add('description')
+
+            ->add('tags', CollectionType::class, array(
+                'entry_type'   => TagType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ))
         ;
     }
     

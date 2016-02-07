@@ -3,6 +3,7 @@
 namespace TaskBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Task
@@ -35,6 +36,15 @@ class Task
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="task", cascade={"persist"})
+     */
+    protected $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -92,6 +102,23 @@ class Task
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag)
+    {
+        $tag->setTask($this);
+
+        $this->tags->add($tag);
+    }
+
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
     }
 }
 
