@@ -5,6 +5,7 @@
   "main": "1_beep_boop.js",
   "dependencies": {
     "concat-stream": "^1.5.1",
+    "duplexer": "^0.1.1",
     "request": "^2.69.0",
     "split": "^1.0.0",
     "through2": "^2.0.1",
