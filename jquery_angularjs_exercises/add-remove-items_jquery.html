@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <title>Add/Remove Items using jQuery</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <style>
+            body { text-align: center; }
+            td   { text-align: left; }
+            td.action { text-align: center; }
+            #container { width: 700px; margin: 0 auto;}
+        </style>
+    </head>
+
+    <body>
+        <h3>Dynamic Table</h3>
+
+        <div id="container">
+            <table class="table table-striped table-bordered dynamic-table">
+                <tr><th>First Name</th><th>Last Name</th><th>Username</th><th></th></tr>
+                <tr>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td class="action"><button type="button" class="btn btn-danger remove">del</button></td>
+                </tr>
+                <tr>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td class="action"><button type="button" class="btn btn-danger remove">del</button></td>
+                </tr>
+                <tr>
+                    <td>Larry the Bird</td>
+                    <td></td>
+                    <td>@twitter</td>
+                    <td class="action"><button type="button" class="btn btn-danger remove">del</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="first_name" /></td>
+                    <td><input type="text" name="last_name" /></td>
+                    <td><input type="text" name="username" /></td>
+                    <td><button type="button" class="btn btn-primary add">add</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                function deleteParentRow(button) {
+                    button.parent().parent().remove();
+                }
+
+                $('.dynamic-table .remove').click(function () {
+                    deleteParentRow($(this));
+                });
+
+                $('.dynamic-table .add').click(function () {
+                    var newRow = $('<tr>');
+
+                    $(this).parent().siblings().each(function () {
+                        var input = $(this).children()[0];
+                        newRow.append($('<td>').html(input.value));
+                    });
+
+                    newRow.append($('<td class="action"><button type="button" class="btn btn-danger remove">del</button></td>'));
+
+                    $('.dynamic-table').find('tr:nth-last-child(2)').after(newRow);
+
+                    $(newRow).find('button').click(function () {
+                        deleteParentRow($(this));
+                    });
+                });
+            });
+        </script>
+    </body>
+
+</html>
