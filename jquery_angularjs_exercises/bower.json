@@ -1,0 +1,21 @@
+{
+  "name": "2016-05-20 JavaScript Exercises",
+  "authors": [
+    "Marcello Messori <marcello.mm.messori@gmail.com>"
+  ],
+  "description": "web frontend exercises using javascript libraries and frameworks",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
