@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <title>Confirm All Checked</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <style>
+            body { text-align: center; }
+            td   { text-align: left; }
+            td.action { text-align: center; }
+            #container { width: 700px; margin: 0 auto;}
+        </style>
+    </head>
+
+    <body>
+        <h3>Confirm All Checked using jQuery</h3>
+
+        <div id="container">
+            <form>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="check-all" id="check1" /> Check me out 1
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="check-all" id="check2" /> Check me out 2
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="check-all" id="check3" /> Check me out 3
+                    </label>
+                </div>
+            </form>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                function doSomething() {
+                    console.log('do something');
+                }
+
+                function doNothing() {
+                    console.log('do nothing');
+                }
+
+                $('.check-all').click(function () {
+                    var formElement = $(this).parent().parent().parent();
+
+                    var checkedNumber = formElement.find(':checkbox:checked').length;
+                    var totalNumber = formElement.children().length;
+
+                    if (checkedNumber === totalNumber) {
+                        if (confirm('All items checked: do you want to do something?')) {
+                            doSomething();
+                        } else {
+                            doNothing();
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>
