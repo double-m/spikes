@@ -4,9 +4,9 @@
     "Marcello Messori <marcello.mm.messori@gmail.com>"
   ],
   "description": "web frontend exercises using javascript libraries and frameworks",
-  "main": "",
+  "main": "add-remove-items_angularjs.html",
   "license": "MIT",
-  "homepage": "add-remove-items_jquery.html",
+  "homepage": "",
   "private": true,
   "ignore": [
     "**/.*",
@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "angularjs#^1.5.5",
     "bootstrap": "^3.3.6"
   }
 }

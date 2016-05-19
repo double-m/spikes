@@ -5,6 +5,7 @@
 These exercises involve:
 
 - jQuery,
+- AngularJS,
 - Bootstrap,
 - Bower.
 

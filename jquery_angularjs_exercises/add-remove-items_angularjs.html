@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <title>Add/Remove Items using AngularJS</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+
+        <style>
+            body { text-align: center; }
+            td   { text-align: left; }
+            td.action { text-align: center; }
+            #container { width: 700px; margin: 0 auto;}
+        </style>
+    </head>
+
+    <body>
+        <h3>Dynamic Table using AngularJS</h3>
+
+        <div id="container" ng-app="dynamicForm" ng-controller="dynamicFormTable">
+            <table class="table table-striped table-bordered dynamic-table">
+                <tr><th>First Name</th><th>Last Name</th><th>Username</th><th></th></tr>
+                <tr ng-repeat="user in users">
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName  }}</td>
+                    <td>{{ user.username  }}</td>
+                    <td class="action"><button type="button" class="btn btn-danger" ng-click="delRow($index)">del</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="first_name" ng-model="firstName" /></td>
+                    <td><input type="text" name="last_name" ng-model="lastName" /></td>
+                    <td><input type="text" name="username" ng-model="username" /></td>
+                    <td><button type="button" class="btn btn-primary" ng-click="addRow()">add</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <script type="text/javascript">
+            var dynamicForm = angular.module("dynamicForm", []);
+
+            dynamicForm.controller("dynamicFormTable", function($scope) {
+                $scope.users = [
+                    {
+                        firstName: 'Mark',
+                        lastName:  'Otto',
+                        username:  '@mdo'
+                    }, {
+                        firstName: 'Jacob',
+                        lastName:  'Thornton',
+                        username:  '@fat'
+                    }, {
+                        firstName: 'Larry the Bird',
+                        lastName:  '',
+                        username:  '@twitter'
+                    }
+                ];
+
+                $scope.addRow = function() {
+                    $scope.users.push({
+                        firstName: $scope.firstName, 
+                        lastName:  $scope.lastName,
+                        username:  $scope.username
+                    });
+
+                    $scope.name = '';
+                    $scope.employees = '';
+                    $scope.headoffice = '';
+                };
+
+                $scope.delRow = function(_id) {
+                    $scope.users.splice(_id, 1);
+                };
+            });
+        </script>
+    </body>
+
+</html>
