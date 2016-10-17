@@ -22,3 +22,19 @@ bower install --save bootstrap
 touch client/public/index.html  # entry point for the browser, mapped on / by Express
 touch client/public/app.js      # entry point for the Angular application
 ```
+
+Change structure so to separate client from server
+
+```
+tree
+.
+├── ...
+├── client
+│   └── public
+├── ...
+└── server
+    ├── bin
+    ├── public
+    ├── routes
+    └── views
+```
