@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Angular App</title>
+        <meta   charset="utf-8" />
+        <script src="components/bower-angularjs/angular.js"></script>
+        <script src="app.js"></script>
+        <link   href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body ng-app="meanIntegrationApp" ng-controller="mainCtrl as main">
+        <h1>Angular App</h1>
+
+        <div>
+            <ul>
+                <li ng-repeat="item in main.items">{{item}}</li>
+            </ul>
+        </div>
+    </body>
+</html>
