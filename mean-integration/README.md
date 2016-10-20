@@ -56,3 +56,16 @@ npm install --save passport-local
 ```
 
 then add a `login.html` page and start from `server/app.js`.
+
+### Development tools: nodemon
+
+```
+npm install --save-dev nodemon
+```
+
+so the application can be started and monitored with
+
+```
+node_modules/nodemon/bin/nodemon.js -e html,js server/bin/www
+```
+
