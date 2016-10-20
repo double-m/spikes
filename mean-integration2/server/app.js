@@ -18,6 +18,8 @@ app.get('/', function(request, response){
   });
 });
 
+app.use('/products', express.static('client/public'));
+
 app.get('/api/products', function(request, response) {
   var cursor = app.locals.db.collection('products').find({});
 
@@ -38,9 +40,7 @@ app.post('/api/products', function(request, response) {
       return false;
   }
 
-  app.locals.db.collection('products').insert({
-      product: product
-  }, function(err, result) {
+  app.locals.db.collection('products').insert(product, function(err, result) {
       if(err) throw err;
 
       var outputMessage = 'stored a new product: "' + product + '"' + os.EOL;

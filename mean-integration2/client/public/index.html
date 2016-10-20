@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Product List</title>
+        <meta   charset="utf-8" />
+        <script src="components/bower-angularjs/angular.js"></script>
+        <script src="app.js"></script>
+        <link   href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body ng-app="meanProduct" ng-controller="mainCtrl as main">
+
+        <div>
+            <h3>List of Products</h3>
+            <ul>
+                <li ng-repeat="product in main.products">
+                    <span>{{ product.code }}</span>
+                    <span>{{ product.name }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>New Products</h3>
+
+            <label for="product-name">name</label>
+            <input id="product-name" type="input" ng-model="main.newProductName" />
+
+            <label for="product-code">code</label>
+            <input id="product-code" type="input" ng-model="main.newProductCode" />
+
+            <input type="button" name="add" value="Add" ng-click="main.addProduct()" />
+        </div>
+
+    </body>
+</html>
