@@ -19,3 +19,10 @@ npm install --save express
 ```
 npm install --save mongodb
 ```
+
+### Development utilities: nodemon
+
+```
+npm install --save-dev nodemon
+node_modules/nodemon/bin/nodemon.js -e js,html bin/www
+```
