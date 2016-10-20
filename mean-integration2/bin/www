@@ -1,18 +1,20 @@
-const express = require('express')
-    , MongoClient = require('mongodb').MongoClient;
-
-app = express();
-
-app.get('/', function(request, response) {
-  response.send('Hello World');
-});
-
-var mongoUrl = 'mongodb://localhost:27017/mean-integration2';
+const app = require('../server/app')
+    , MongoClient = require('mongodb').MongoClient
+    , mongoUrl = 'mongodb://localhost:27017/mean-integration2'
+    , port = 3000;
 
 MongoClient.connect(mongoUrl, function(err, db) {
   if (err) throw err;
 
+  // db fixtures
+  var cursor = db.collection('fixtures').find({'key': {$eq: 'greetingMessage'}});
+  cursor.toArray(function(err, fixtures) {
+    if (fixtures.length === 0) {
+      db.collection('fixtures').insert({key: 'greetingMessage', message: 'Hello from MongoDB'});
+    }
+  });
+
   app.locals.db = db;
 
-  app.listen(3000);
+  app.listen(port);
 });
