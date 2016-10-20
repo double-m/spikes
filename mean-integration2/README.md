@@ -13,3 +13,9 @@ mkdir mean-integration
 cd mean-integration
 npm install --save express
 ```
+
+### Database
+
+```
+npm install --save mongodb
+```
